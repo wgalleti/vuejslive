@@ -1,0 +1,14 @@
+.env
+.envdev
+.idea
+.vscode
+.venv
+*.sqlite3
+*pyc
+logs
+.ipynb_checkpoints
+*.ipynb
+static/
+00*
+.coverage
+coverage.xml
