@@ -29,6 +29,12 @@ No frontend iremos necessidar do nodejs 10 (ou 11) e dos seguintes pacotes.
 * Lifecycle Hooks
 * Components
 
+## Endpoints
+
+* Instrutor
+* Curso
+* Conteudo
+
 ## Instalando plugins
 
 Para facilitar nosso desenvolvimento, irei utilizar dois plugins para turbinar nossa produção.
@@ -38,6 +44,10 @@ O primeiro é o `axios` para consumir nossa ai e o segundo será o `vuetify` par
 ## Organizando as coisas
 
 Padrões de pastas e e seus arquivos
+
+## Componentes
+
+Aqui explico o porque do amor todo
 
 ## Que store é esse? (Frase do Tony Lampada)
 
