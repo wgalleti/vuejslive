@@ -4,7 +4,7 @@
 
 https://medium.com/@breakzplatform/como-%C3%A9-programar-em-javascript-em-2016-ede3224f5a14
 
-Nesse artigo, cômico, porém uma das realidades que afastam um pouco os desenvolvedores do frontend. Vale a pena a leitura!
+Nesse artigo, cômico, porém uma das realidades que afastam um pouco os desenvolvedores do frontend, o autor fala sobre como uma pessoal que já teve contato com javascript a algum tempo e agora precisa voltar. Vale a pena a leitura!
 
 ## Javascripts necessários!
 
