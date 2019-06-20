@@ -6,7 +6,6 @@ Vamos iniciar um projeto com o `vue-cli 3` e criar os componentes para consumir 
 
 > A idéia é ser bem objetivo para em um pequeno prazo de tempo, fazermos algo interessante.
 
-
 ## O que vamos utilizar
 
 No backend, vamos utilizar uma api padrão do Django Rest Framework com alguns modelos.
