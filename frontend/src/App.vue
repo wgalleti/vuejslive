@@ -1,10 +1,11 @@
 <template>
   <v-app id="inspire">
     <v-toolbar
+      flat
+      app
       :clipped-left="$vuetify.breakpoint.lgAndUp"
       color="primary"
       dark
-      app
       fixed
     >
       <v-toolbar-title class="ml-0 pl-3">
@@ -20,10 +21,8 @@
 
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout row wrap>
-          <router-view/>
-        </v-layout>
+      <v-container fluid>
+        <router-view/>
       </v-container>
     </v-content>
   </v-app>

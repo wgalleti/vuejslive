@@ -1,6 +1,5 @@
 <template>
   <div class="instrutores">
-
     <v-dialog v-model="dialog" persistent max-width="400">
       <v-card>
         <v-card-title>
@@ -43,7 +42,7 @@
         <td>{{ props.item.id }}</td>
         <td>{{ props.item.nome }}</td>
         <td>{{ props.item.email }}</td>
-        <td class="justify-center">
+        <td class="text-sm-center">
           <v-icon
             small
             class="mr-2"
