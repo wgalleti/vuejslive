@@ -10,6 +10,11 @@ class InstrutorSerializer(serializers.ModelSerializer):
 
 
 class CursoSerializer(serializers.ModelSerializer):
+    instrutor_display = serializers.SerializerMethodField()
+
+    def get_instrutor_display(self, curso: Curso):
+        return curso.instrutor.nome.title()
+
     class Meta:
         model = Curso
         fields = '__all__'
