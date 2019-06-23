@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('./views/Home.vue')
+      name: 'login',
+      component: () => import('./views/Login.vue')
     },
     {
       path: '/instrutores',
@@ -27,3 +28,16 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (store.getters['estaLogado']) {
+    next()
+  } else {
+    if (to.path !== '/') {
+      next('/')
+    }
+    next()
+  }
+})
+
+export default router
