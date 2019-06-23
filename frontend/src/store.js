@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from './plugins/axios'
+import { set, load, save, remove } from './utils/vuex'
 
 Vue.use(Vuex)
 
@@ -13,28 +13,16 @@ export default new Vuex.Store({
     cursos: []
   },
   mutations: {
-    SET_INSTRUTORES (state, instrutores) {
-      state.instrutores = instrutores
-    },
-    SET_CURSOS (state, cursos) {
-      state.cursos = cursos
-    }
+    SET_INSTRUTORES: set('instrutores'),
+    SET_CURSOS: set('cursos')
   },
   actions: {
-    loadInstrutores: context => {
-      return axios.get(urlInstrutores).then(
-        res => {
-          context.commit('SET_INSTRUTORES', res.data)
-        }
-      )
-    },
-    loadCursos: context => {
-      return axios.get(urlCursos).then(
-        res => {
-          context.commit('SET_CURSOS', res.data)
-        }
-      )
-    },
+    loadInstrutores: load(urlInstrutores, 'SET_INSTRUTORES'),
+    salvarInstrutor: save(urlInstrutores),
+    removerInstrutor: remove(urlInstrutores),
 
+    loadCursos: load(urlCursos, 'SET_CURSOS'),
+    salvarCurso: save(urlCursos),
+    removerCurso: remove(urlCursos)
   }
 })

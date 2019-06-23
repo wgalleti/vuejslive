@@ -18,23 +18,11 @@
             </v-flex>
           </v-layout>
           <v-layout row wrap>
-            <v-flex xs12>
-              <v-text-field
-                prepend-icon="people"
-                placeholder="Nome"
-                v-model="form.nome"
-                :rules="rule.nome"
-                :auto-focus="true"
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field
-                prepend-icon="email"
-                placeholder="Email"
-                :rules="rule.email"
-                v-model="form.email"
-              ></v-text-field>
-            </v-flex>
+            <template v-for="item in items">
+              <v-flex xs12 :key="item.vModel">
+                <component :is="item.type" v-bind="item" v-model="form[item.modelo]"></component>
+              </v-flex>
+            </template>
           </v-layout>
         </v-card-text>
         <v-card-actions>
@@ -48,8 +36,6 @@
 </template>
 
 <script>
-import axios from '../plugins/axios'
-
 export default {
   props: {
     dialog: {
@@ -60,7 +46,11 @@ export default {
       type: Object,
       required: true
     },
-    url: {
+    items: {
+      type: Array,
+      required: true
+    },
+    apiSave: {
       type: String,
       required: true
     }
@@ -78,29 +68,14 @@ export default {
     async salvar () {
       if (this.$refs.form.validate()) {
         this.aguardando = true
-        // Adicionando
-        if (this.form.id === 0) {
-          try {
-            await axios.post(this.url, this.form)
-            this.aguardando = false
-            this.modal = false
-          } catch (e) {
-            console.error(e)
-            this.erro = true
-            this.aguardando = false
-          }
-        } else {
-          const { id } = this.form
-          // api/instrutores/ID/
-          try {
-            await axios.patch(`${this.url}${id}/`, this.form)
-            this.aguardando = false
-            this.modal = false
-          } catch (e) {
-            console.error(e)
-            this.erro = true
-            this.aguardando = false
-          }
+        try {
+          await this.$store.dispatch(this.apiSave, this.form)
+          this.aguardando = false
+          this.modal = false
+        } catch (e) {
+          console.error(e)
+          this.erro = true
+          this.aguardando = false
         }
       }
     }

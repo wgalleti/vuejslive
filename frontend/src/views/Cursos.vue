@@ -1,58 +1,84 @@
 <template>
-  <div class="cursos">
-
-    <app-listagem
-      :headers="headers"
-      :dados="cursos"
-      :tem-crud="false"/>
-  </div>
+  <app-crud
+    :dados="$store.state.cursos"
+    carregadorDados="loadCursos"
+    acaoSalvar="salvarCurso"
+    acaoRemover="removerCurso"
+    :lista-campos="campos"/>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
-  name: 'Cursos',
-  data () {
-    return {
-      headers: [
+  computed: {
+    ...mapState(['instrutores']),
+    campos () {
+      return [
         {
           text: '#',
           align: 'left',
-          value: 'id'
+          value: 'id',
+          allowForm: false
         }, {
           text: 'Nome',
           align: 'left',
-          value: 'nome'
+          value: 'nome',
+          allowForm: true,
+          form: {
+            type: 'v-text-field',
+            prependIcon: 'people',
+            label: 'Nome',
+            modelo: 'nome',
+            rules: [
+              v => !!v || 'Nome é um campo obrigatório!'
+            ]
+          }
         }, {
           text: 'Duração',
           align: 'left',
-          value: 'duracao'
+          value: 'duracao',
+          allowForm: true,
+          form: {
+            type: 'v-text-field',
+            prependIcon: '',
+            label: 'Duração',
+            modelo: 'duracao',
+            rules: [
+              v => !!v || 'Duração é um campo obrigatório!'
+            ]
+          }
         }, {
           text: 'Instrutor',
           align: 'left',
-          value: 'instrutor_display'
+          value: 'instrutor_display',
+          allowForm: false
+        }, {
+          text: 'Instrutor',
+          align: 'left',
+          value: 'instrutor',
+          allowForm: true,
+          allowTable: false,
+          form: {
+            type: 'v-select',
+            items: this.instrutores,
+            itemText: 'nome',
+            itemValue: 'id',
+            prependIcon: 'person',
+            label: 'Instrutor',
+            modelo: 'instrutor',
+            rules: [
+              v => !!v || 'Instrutor é um campo obrigatório!'
+            ]
+          }
+        }, {
+          text: 'Opçoes',
+          align: 'center',
+          value: '',
+          allowForm: false
         }
-        // {
-        //   text: 'Opçoes',
-        //   align: 'center',
-        //   value: ''
-        // }
       ]
     }
-  },
-  computed: {
-    ...mapState(['cursos'])
-  },
-  methods: {
-    ...mapActions(['loadCursos'])
-  },
-  mounted () {
-    this.loadCursos()
   }
 }
 </script>
-
-<style scoped>
-
-</style>

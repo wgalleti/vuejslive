@@ -3,14 +3,15 @@
     <app-form
       :dialog="dialog"
       :form="form"
+      :items="formItems"
+      :api-save="acaoSalvar"
       url="api/instrutores/"
       @modal="dialog = $event"
       @atualizar="atualizar"
     />
-
     <app-listagem
-      :headers="headers"
-      :dados="instrutores"
+      :headers="tableHeaders"
+      :dados="dados"
       @editar="editarAqui"
       @remover="removerAqui"/>
 
@@ -31,39 +32,48 @@
 <script>
 
 export default {
+  props: {
+    dados: {
+      type: Array,
+      required: true
+    },
+    carregadorDados: {
+      type: String,
+      required: true
+    },
+    acaoSalvar: {
+      type: String,
+      required: true
+    },
+    acaoRemover: {
+      type: String,
+      required: true
+    },
+    listaCampos: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       dialog: false,
       form: {},
-      headers: [
-        {
-          text: '#',
-          align: 'left',
-          value: 'id'
-        }, {
-          text: 'Nome',
-          align: 'left',
-          value: 'nome'
-        }, {
-          text: 'Email',
-          align: 'left',
-          value: 'email'
-        }, {
-          text: 'Opçoes',
-          align: 'center',
-          value: ''
-        }
-      ]
+      headers: []
     }
   },
   computed: {
-    instrutores () {
-      return this.$store.state.instrutores
+    tableHeaders () {
+      return this.listaCampos.filter(f => typeof f.allowTable === 'undefined' ? true : f.allowTable)
+    },
+    formItems () {
+      return this.listaCampos
+        .filter(f => f.allowForm)
+        .map(m => m.form)
     }
   },
   methods: {
     async carregar () {
-      this.$store.dispatch('loadInstrutores')
+      this.$store.dispatch(this.carregadorDados)
     },
     adicionar () {
       this.form = {
@@ -81,9 +91,8 @@ export default {
     },
     async removerAqui (item) {
       if (confirm('Tem certeza que quer apagar?')) {
-        const { id } = item
         try {
-          await axios.delete(`api/instrutores/${id}/`)
+          await this.$store.dispatch(this.acaoRemover, item)
           this.carregar()
         } catch (e) {
           console.error(e)
