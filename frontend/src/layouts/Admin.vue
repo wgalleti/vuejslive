@@ -14,11 +14,8 @@
       <v-btn flat to="/">
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn flat to="instrutores">
-        Instrutores
-      </v-btn>
-      <v-btn flat to="cursos">
-        Cursos
+      <v-btn flat :to="menu.path" v-for="menu in menus" :key="menu.path">
+        {{menu.name}}
       </v-btn>
       <v-spacer></v-spacer>
 
@@ -26,3 +23,13 @@
     <slot></slot>
   </v-app>
 </template>
+
+<script>
+export default {
+  computed: {
+    menus () {
+      return this.$router.options.routes.filter(f => f.path !== '/')
+    }
+  }
+}
+</script>

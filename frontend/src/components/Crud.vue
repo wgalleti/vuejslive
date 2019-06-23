@@ -68,7 +68,7 @@ export default {
     formItems () {
       return this.listaCampos
         .filter(f => f.allowForm)
-        .map(m => m.form)
+        .map(m => ({ ...m.form, modelo: m.value, label: m.text }))
     }
   },
   methods: {

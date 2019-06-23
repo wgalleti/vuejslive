@@ -25,8 +25,6 @@ export default {
           form: {
             type: 'v-text-field',
             prependIcon: 'people',
-            label: 'Nome',
-            modelo: 'nome',
             rules: [
               v => !!v || 'Nome é um campo obrigatório!'
             ]
@@ -40,8 +38,6 @@ export default {
           form: {
             type: 'v-text-field',
             prependIcon: 'email',
-            label: 'Email',
-            modelo: 'email',
             rules: [
               v => !!v || 'Email é um campo obrigatório!'
             ]

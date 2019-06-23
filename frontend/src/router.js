@@ -11,11 +11,6 @@ export default new Router({
       component: () => import('./views/Home.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
-    },
-    {
       path: '/instrutores',
       name: 'Instrutores',
       component: () => import('./views/Instrutores.vue')
@@ -24,6 +19,11 @@ export default new Router({
       path: '/cursos',
       name: 'Cursos',
       component: () => import('./views/Cursos.vue')
+    },
+    {
+      path: '/conteudos',
+      name: 'Conteudos',
+      component: () => import('./views/Conteudos.vue')
     }
   ]
 })

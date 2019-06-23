@@ -6,15 +6,18 @@ Vue.use(Vuex)
 
 const urlInstrutores = 'api/instrutores/'
 const urlCursos = 'api/cursos/'
+const urlConteudos = 'api/conteudos/'
 
 export default new Vuex.Store({
   state: {
     instrutores: [],
-    cursos: []
+    cursos: [],
+    conteudos: []
   },
   mutations: {
     SET_INSTRUTORES: set('instrutores'),
-    SET_CURSOS: set('cursos')
+    SET_CURSOS: set('cursos'),
+    SET_CONTEUDOS: set('conteudos')
   },
   actions: {
     loadInstrutores: load(urlInstrutores, 'SET_INSTRUTORES'),
@@ -23,6 +26,10 @@ export default new Vuex.Store({
 
     loadCursos: load(urlCursos, 'SET_CURSOS'),
     salvarCurso: save(urlCursos),
-    removerCurso: remove(urlCursos)
+    removerCurso: remove(urlCursos),
+
+    loadConteudos: load(urlConteudos, 'SET_CONTEUDOS'),
+    salvarConteudo: save(urlConteudos),
+    removerConteudo: remove(urlConteudos)
   }
 })

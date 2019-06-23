@@ -1,9 +1,9 @@
 <template>
   <app-crud
-    :dados="$store.state.cursos"
-    carregadorDados="loadCursos"
-    acaoSalvar="salvarCurso"
-    acaoRemover="removerCurso"
+    :dados="$store.state.conteudos"
+    carregadorDados="loadConteudos"
+    acaoSalvar="salvarConteudo"
+    acaoRemover="removerConteudo"
     :lista-campos="campos"/>
 </template>
 
@@ -12,10 +12,10 @@ import { mapState } from 'vuex'
 
 export default {
   mounted () {
-    this.$store.dispatch('loadInstrutores')
+    this.$store.dispatch('loadCursos')
   },
   computed: {
-    ...mapState(['instrutores']),
+    ...mapState(['cursos']),
     campos () {
       return [
         {
@@ -24,48 +24,48 @@ export default {
           value: 'id',
           allowForm: false
         }, {
-          text: 'Nome',
+          text: 'Url do Video',
           align: 'left',
-          value: 'nome',
+          value: 'video_url',
           allowForm: true,
           form: {
             type: 'v-text-field',
-            prependIcon: 'people',
+            prependIcon: 'link',
             rules: [
-              v => !!v || 'Nome é um campo obrigatório!'
+              v => !!v || 'URL é um campo obrigatório!'
             ]
           }
         }, {
-          text: 'Duração',
+          text: 'Comentário',
           align: 'left',
-          value: 'duracao',
+          value: 'comentario',
           allowForm: true,
           form: {
-            type: 'v-text-field',
+            type: 'v-textarea',
             prependIcon: '',
             rules: [
-              v => !!v || 'Duração é um campo obrigatório!'
+              v => !!v || 'Comentário é um campo obrigatório!'
             ]
           }
         }, {
-          text: 'Instrutor',
+          text: 'Curso',
           align: 'left',
-          value: 'instrutor_display',
+          value: 'curso_display',
           allowForm: false
         }, {
-          text: 'Instrutor',
+          text: 'Curso',
           align: 'left',
-          value: 'instrutor',
+          value: 'curso',
           allowForm: true,
           allowTable: false,
           form: {
             type: 'v-select',
-            items: this.instrutores,
+            items: this.cursos,
             itemText: 'nome',
             itemValue: 'id',
-            prependIcon: 'person',
+            prependIcon: 'menu',
             rules: [
-              v => !!v || 'Instrutor é um campo obrigatório!'
+              v => !!v || 'Curso é um campo obrigatório!'
             ]
           }
         }, {
