@@ -21,6 +21,11 @@ class CursoSerializer(serializers.ModelSerializer):
 
 
 class ConteudoSerializer(serializers.ModelSerializer):
+    curso_display = serializers.SerializerMethodField()
+
+    def get_curso_display(self, conteudo: Conteudo):
+        return conteudo.curso.nome.title()
+
     class Meta:
         model = Conteudo
         fields = '__all__'
